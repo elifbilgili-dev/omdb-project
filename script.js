@@ -9,6 +9,7 @@ const movieTitle = document.getElementById("movieTitle");
 const movieYear = document.getElementById("movieYear");
 const movieGenre = document.getElementById("movieGenre");
 const movieDirector = document.getElementById("movieDirector");
+const movieRating = document.getElementById("movieRating");
 
 const apiKey = "424c1f6b";
 
@@ -36,6 +37,7 @@ async function searchMovie(movieName) {
     movieYear.textContent = data.Year;
     movieGenre.textContent = data.Genre;
     movieDirector.textContent = data.Director;
+    movieRating.textContent = data.imdbRating;
 
     movieCard.classList.remove("hidden");
 
