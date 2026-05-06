@@ -1,61 +1,88 @@
 
-const movieInput = document.getElementById("movieInput");
 const searchBtn = document.getElementById("searchBtn");
-const message = document.getElementById("message");
-
+const searchInput = document.getElementById("searchInput");
 const movieCard = document.getElementById("movieCard");
-const moviePoster = document.getElementById("moviePoster");
-const movieTitle = document.getElementById("movieTitle");
-const movieYear = document.getElementById("movieYear");
-const movieGenre = document.getElementById("movieGenre");
-const movieDirector = document.getElementById("movieDirector");
-const movieRating = document.getElementById("movieRating");
+const errorMessage = document.getElementById("errorMessage");
 
-const apiKey = "424c1f6b";
+const API_KEY = "424c1f6b";
 
-async function searchMovie(movieName) {
-  message.textContent = "";
-  movieCard.classList.add("hidden");
+function filmiAra() {
+  const arananFilm = searchInput.value.trim();
 
-  if (!movieName) {
-    message.textContent = "Please enter a movie name.";
+  if (arananFilm === "") {
+    hataGoster("Lütfen bir film adı girin.");
     return;
   }
+  localStorage.setItem("sonArama", arananFilm);
+  filmiBul(arananFilm);
+}
+
+async function filmiBul(filmAdi) {
+  const url = `https://www.omdbapi.com/?apikey=${API_KEY}&t=${encodeURIComponent(filmAdi)}`;
 
   try {
-    const response = await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(movieName)}&apikey=${apiKey}`);
-    const data = await response.json();
+    const cevap = await fetch(url);
+    const veri = await cevap.json();
 
-    if (data.Response === "False") {
-      message.textContent = data.Error;
+    if (veri.Response === "False") {
+      hataGoster("Film bulunamadı. Lütfen başka bir isim deneyin.");
       return;
     }
 
-    moviePoster.src = data.Poster !== "N/A" ? data.Poster : "";
-    moviePoster.alt = data.Title;
-    movieTitle.textContent = data.Title;
-    movieYear.textContent = data.Year;
-    movieGenre.textContent = data.Genre;
-    movieDirector.textContent = data.Director;
-    movieRating.textContent = data.imdbRating;
+    filmiGoster(veri);
 
-    movieCard.classList.remove("hidden");
-
-    localStorage.setItem("lastMovie", movieName);
-  } catch (error) {
-    message.textContent = "Something went wrong. Please try again.";
+  } catch (hata) {
+    hataGoster("Bir hata oluştu. İnternet bağlantınızı kontrol edin.");
   }
 }
 
-searchBtn.addEventListener("click", () => {
-  const movieName = movieInput.value.trim();
-  searchMovie(movieName);
+function hataGoster(mesaj) {
+  errorMessage.textContent = mesaj;
+  errorMessage.classList.remove("hidden");
+  movieCard.classList.add("hidden");
+}
+
+function ekraniTemizle() {
+  errorMessage.classList.add("hidden");
+  movieCard.classList.add("hidden");
+}
+
+function filmiGoster(film) {
+  ekraniTemizle();
+
+  const poster = film.Poster !== "N/A" ? film.Poster : "https://via.placeholder.com/150x220?text=Poster+Yok";
+
+  movieCard.innerHTML = `
+    <img src="${poster}" alt="${film.Title} posteri" />
+    <div class="movie-info">
+      <h2>${film.Title}</h2>
+      <p><span>Yıl:</span> ${film.Year}</p>
+      <p><span>Tür:</span> ${film.Genre}</p>
+      <p><span>Yönetmen:</span> ${film.Director}</p>
+      <p><span>IMDB Puanı:</span> ${film.imdbRating}</p>
+      <p><span>Özet:</span> ${film.Plot}</p>
+    </div>
+  `;
+
+  movieCard.classList.remove("hidden");
+}
+
+searchBtn.addEventListener("click", function() {
+  ekraniTemizle();
+  filmiAra();
 });
 
-window.addEventListener("load", () => {
-  const lastMovie = localStorage.getItem("lastMovie");
-  if (lastMovie) {
-    movieInput.value = lastMovie;
-    searchMovie(lastMovie);
+searchInput.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    ekraniTemizle();
+    filmiAra();
+  }
+});
+
+window.addEventListener("load", function() {
+  const sonArama = localStorage.getItem("sonArama");
+  if (sonArama) {
+    searchInput.value = sonArama;
+    filmiBul(sonArama);
   }
 });

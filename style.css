@@ -2,184 +2,94 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 50px 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
 }
 
-.container {
-  width: 100%;
-  max-width: 900px;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 24px;
-  padding: 35px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
-}
-
-h1 {
-  text-align: center;
-  color: #ffffff;
-  font-size: 42px;
-  margin-bottom: 30px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-
-.search-box {
-  display: flex;
-  gap: 14px;
-  margin-bottom: 20px;
-}
-
-.search-box input {
-  flex: 1;
-  padding: 16px 18px;
-  border: none;
-  outline: none;
-  border-radius: 14px;
-  font-size: 17px;
-  background: rgba(255, 255, 255, 0.95);
-  color: #1f2937;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
-}
-
-.search-box input::placeholder {
-  color: #6b7280;
-}
-
-.search-box button {
-  padding: 16px 26px;
-  border: none;
-  border-radius: 14px;
-  font-size: 17px;
-  font-weight: 600;
-  cursor: pointer;
+header {
+  background-color: #1a1a2e;
   color: white;
-  background: linear-gradient(135deg, #f97316, #fb923c);
-  box-shadow: 0 8px 18px rgba(249, 115, 22, 0.35);
-  transition: all 0.25s ease;
-}
-
-.search-box button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 22px rgba(249, 115, 22, 0.45);
-}
-
-#message {
+  padding: 20px;
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 17px;
-  color: #f8fafc;
-  min-height: 24px;
 }
 
-.movie-card {
+main {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.search-area {
   display: flex;
-  gap: 24px;
-  align-items: flex-start;
-  padding: 24px;
-  margin-top: 10px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.10);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  gap: 10px;
+  margin-bottom: 30px;
 }
 
-.movie-card img {
-  width: 220px;
-  max-width: 100%;
-  border-radius: 16px;
-  object-fit: cover;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
-}
-
-.movie-info {
+input {
   flex: 1;
-  color: #ffffff;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  outline: none;
 }
 
-.movie-info h2 {
-  font-size: 32px;
-  margin-bottom: 18px;
-  color: #ffffff;
+input:focus {
+  border-color: #1a1a2e;
 }
 
-.movie-info p {
-  font-size: 18px;
-  margin-bottom: 12px;
-  line-height: 1.6;
-  color: #e5e7eb;
+button {
+  padding: 12px 24px;
+  background-color: #1a1a2e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-.movie-info strong {
-  color: #fdba74;
+button:hover {
+  background-color: #16213e;
+}
+
+.error {
+  color: red;
+  margin-bottom: 20px;
+  font-weight: bold;
 }
 
 .hidden {
   display: none;
 }
 
-@media (max-width: 768px) {
-  .container {
-    padding: 24px;
-  }
-
-  h1 {
-    font-size: 30px;
-  }
-
-  .search-box {
-    flex-direction: column;
-  }
-
-  .search-box button {
-    width: 100%;
-  }
-
-  .movie-card {
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-  }
-
-  .movie-card img {
-    width: 200px;
-  }
-
-  .movie-info h2 {
-    font-size: 26px;
-  }
-
-  .movie-info p {
-    font-size: 16px;
-  }
-}
-
-
-.rating-line {
+.movie-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
   display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 10px;
+  gap: 24px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-.rating-badge {
-  display: inline-block;
-  background: linear-gradient(135deg, #ffd36b, #ff9f1c);
-  color: #1f2937;
+.movie-card img {
+  width: 150px;
+  border-radius: 8px;
+}
+
+.movie-info h2 {
+  margin-bottom: 12px;
+  color: #1a1a2e;
+}
+
+.movie-info p {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.movie-info span {
   font-weight: bold;
-  padding: 8px 16px;
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(255, 166, 0, 0.35);
-  font-size: 16px;
 }

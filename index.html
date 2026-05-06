@@ -1,39 +1,28 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OMDB Movie Search</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMDB Movie Search</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>OMDB Movie Search</h1>
 
-    <div class="search-box">
-      <input type="text" id="movieInput" placeholder="Enter movie name" />
-      <button id="searchBtn">Search</button>
-    </div>
+    <header>
+      <h1>Film Arama</h1>
+    </header>
 
-    <p id="message"></p>
-
-    <div id="movieCard" class="movie-card hidden">
-      <img id="moviePoster" src="" alt="Movie Poster" />
-      
-      <div class="movie-info">
-        <h2 id="movieTitle"></h2>
-        <p><strong>Year:</strong> <span id="movieYear"></span></p>
-        <p><strong>Genre:</strong> <span id="movieGenre"></span></p>
-        <p><strong>Director:</strong> <span id="movieDirector"></span></p>
-        <p class="rating-line">
-  <strong>IMDb Rating:</strong>
-  <span id="movieRating" class="rating-badge"></span>
-</p>
+    <main>
+      <div class="search-area">
+        <input type="text" id="searchInput" placeholder="Film adı girin..." />
+        <button id="searchBtn">Ara</button>
       </div>
-    </div>
-  </div>
 
-  <script src="script.js"></script>
-</body>
+      <div id="errorMessage" class="error hidden"></div>
+
+      <div id="movieCard" class="movie-card hidden"></div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
 </html>
